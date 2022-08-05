@@ -158,6 +158,7 @@ L.videoTrack = L.VectorGrid.extend({
         }
     },
 
+    // if use drawTrack function within class, mouseover and click are not working
     drawTrack: function(lineString) {
       console.log('drawing now', lineString);
       var vectorGrid = L.vectorGrid.slicer(lineString, {
@@ -257,6 +258,7 @@ L.videoTrack = L.VectorGrid.extend({
     },
 })
 
+// drawTrack from here, working, but it has to be avoided to avoid the global variables usage
 function drawTrack(lineString){
     console.log('drawing now', lineString);
     var vectorGrid = L.vectorGrid.slicer(lineString, {
