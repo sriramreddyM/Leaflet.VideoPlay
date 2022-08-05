@@ -13,4 +13,4 @@
 > - Example usage is in public folder.
 
 
-<p>Demo at, <href="./piublic"></p>
+[Demo at](https://sriramreddym.github.io/Leaflet.VideoPlay/public/)</p>
