@@ -11,3 +11,6 @@
 >
 > - npm run build (broweserify is needed).
 > - Example usage is in public folder.
+
+
+<p>Demo at, <href="./piublic"></p>
