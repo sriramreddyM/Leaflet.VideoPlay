@@ -14,11 +14,40 @@ async function html5video(div_id='vplayer', video_link){
 
   var player = document.getElementById(div_id)
   player.innerHTML = '';
+  console.log("player here", player);
   player.appendChild(video);
   
   video.play();
   return video;
 }
+
+async function YTvideo(div_id='vplayer', video_id, l, that){
+  var player = document.getElementById(div_id);
+  player.innerHTML = '';
+
+  var video = document.createElement('div');
+  video.setAttribute("id", "YTvideo");
+  video.setAttribute("style", player.getAttribute('style'));
+  console.log("player here", player);
+  player.appendChild(video);
+
+  player = new YT.Player('YTvideo', {
+    height: '180',
+    width: '300',
+    videoId: video_id,
+    playerVars: {
+      'playsinline': 1,
+      'start': Math.floor(l/1000)
+    },
+    events: {
+      'onReady': onPlayerReady,
+      'onStateChange': that.onPlayerStateChange.bind(that)
+    }
+  });
+  return player;
+}
+
+
 
 function findPosOnTrack(pos, track) {
   var min=9999999, pos_time;
@@ -74,10 +103,12 @@ function stopVideo() {
 L.videoTrack = L.VectorGrid.extend({
 
     // constructor function
-    initialize: function (lineString, options) {
+    initialize: function (lineString, div_id, options) {
         console.log("this is", this);
         this.lineString = lineString;
         this.selected_track = undefined;
+        this.markerPlayer = undefined;
+        this.video_eid = div_id;
         L.setOptions(this, options);
 
         this.regular_style = {
@@ -104,22 +135,25 @@ L.videoTrack = L.VectorGrid.extend({
 
     },
 
-    playMarker: function(track, videoUrl, that=this) {
+    playMarker: function(track, videoUrl) {
+      that = this;
+      console.log(track, videoUrl);
       console.log("playermarker")
-      var pf = setInterval(async function(){
-        console.log(that.player);
+      clearInterval(this.pf);
+      this.pf = setInterval(async function(){
+        // console.log(that.player);
         if(typeof that.player.seekTo === 'function'){
           var videoSrc = that.player.playerInfo.videoUrl;
-          console.log(videoUrl, videoSrc);
+          // console.log(videoUrl, videoSrc);
           // if(videoUrl != videoSrc){
           //   console.log('somehting wrong track src and json url');
-          //   clearInterval(pf);
+          //   clearInterval(this.pf);
           // }
           let ppos = await findCTOnTrack(that.player.playerInfo.currentTime, track);
           if(this.vehicleMarker == undefined){
             this.vehicleMarker = L.marker(ppos).addTo(map);
           }
-          console.log(ppos);
+          // console.log(ppos);
           this.vehicleMarker.setLatLng(ppos);        
         }
         else if(that.player.type == 'video/mp4' || 'video/ogg' || 'video/webm'){
@@ -127,7 +161,7 @@ L.videoTrack = L.VectorGrid.extend({
           // console.log(videoUrl, videoSrc);
           if(videoUrl != videoSrc){
             console.log('somehting wrong track src and json url');
-            clearInterval(pf);
+            clearInterval(this.pf);
           }
           let ppos = await findCTOnTrack(that.player.currentTime, track);
           if(this.vehicleMarker == undefined){
@@ -152,7 +186,7 @@ L.videoTrack = L.VectorGrid.extend({
     },
 
     // if use drawTrack function within class, mouseover and click are not working
-    drawTrack: function(that=this) {
+    drawTrack: function(that=this, div_id) {
       console.log('drawing now', this.lineString);
       var vectorGrid = L.vectorGrid.slicer(that.lineString, {
         maxZoom: 18,
@@ -183,20 +217,8 @@ L.videoTrack = L.VectorGrid.extend({
           console.log("new_track", that.selected_track, e.layer.properties.video.url);
           let video_id = youtube_parser(e.layer.properties.video.url);
           if(e.layer.properties.video.source="youtube" && video_id){
-            that.player = new YT.Player('vplayer', {
-              height: '390',
-              width: '640',
-              videoId: video_id,
-              playerVars: {
-                'playsinline': 1,
-                'start': Math.floor(l/1000)
-              },
-              events: {
-                'onReady': onPlayerReady,
-                'onStateChange': that.onPlayerStateChange.bind(that)
-              }
-            });
-            console.log(that.player);
+            that.player = await YTvideo('vplayer', video_id, l, that);
+            // console.log(that.player, that.player.getVideoUrl());
             that.player.addEventListener('onReady', that.playMarker(e.layer.properties.track, that.player.playerInfo.videoUrl));
           }
           else if (e.layer.properties.video.source='html5'){
@@ -253,8 +275,8 @@ L.videoTrack.addTrack = function(lineString, options) {
     return res.addTrack();
 }
 
-L.videoTrack.drawTrack = function(lineString, options) {
-  var res = new L.videoTrack(lineString, options);
+L.videoTrack.drawTrack = function(lineString, div_id, options) {
+  var res = new L.videoTrack(lineString, div_id, options);
   return res.drawTrack();
 }
 },{}]},{},[1]);

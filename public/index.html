@@ -73,7 +73,7 @@ var options = {
 fetch('./sample.json')
     .then(result => result.json())
     .then((output) => {
-        var addedTrack = L.videoTrack.drawTrack(output).addTo(map);
+        var addedTrack = L.videoTrack.drawTrack(output, "vplayer").addTo(map);
     })
     .catch(err => console.error(err));
 
