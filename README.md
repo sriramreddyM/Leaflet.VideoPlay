@@ -9,8 +9,11 @@
 
 > #### To use in website,
 >
-> - npm run build (broweserify is needed).
-> - Example usage is in public folder.
+> - npm run build (broweserify), or
+```Javascript
+<script src="https://unpkg.com/leaflet.videomaps@1.1.0/dist/Leaflet.VideoMaps.js"></script>
+```
+> - Example usage is in dist folder.
 
 
 [Demo at](https://sriramreddym.github.io/Leaflet.VideoMaps/public/)
