@@ -13,4 +13,4 @@
 > - Example usage is in public folder.
 
 
-[Demo at](https://sriramreddym.github.io/Leaflet.VideoPlay/public/)
+[Demo at](https://sriramreddym.github.io/Leaflet.VideoMaps/public/)
