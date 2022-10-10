@@ -4,8 +4,8 @@
   "description": "Play videos synchronised with GPS tracks with timestamp on the leaflet map.",
   "main": "index.js",
   "scripts": {
-    "build": "browserify ./src/index-dev.js -o ./public/bundle.js",
-    "watch": "watchify ./src/index-dev.js -o ./public/bundle.js",
+    "build": "browserify ./src/index-dev.js -o ./dist/Leaflet.VideoPlay.js",
+    "watch": "watchify ./src/index-dev.js -o ./dist/Leaflet.VideoPlay.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
