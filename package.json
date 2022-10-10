@@ -1,5 +1,5 @@
 {
-  "name": "Leaflet.VideoMaps",
+  "name": "Leaflet.videomaps",
   "version": "1.0.0",
   "description": "Play videos synchronised with GPS tracks with timestamp on the leaflet map.",
   "main": "index.js",
