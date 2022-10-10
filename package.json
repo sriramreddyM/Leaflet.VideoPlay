@@ -1,7 +1,7 @@
 {
-  "name": "leafletvideoplay",
+  "name": "Leaflet.VideoMaps",
   "version": "1.0.0",
-  "description": "play videos with GPS tracks synchronised with timestamp on leaflet map.",
+  "description": "Play videos synchronised with GPS tracks with timestamp on the leaflet map.",
   "main": "index.js",
   "scripts": {
     "build": "browserify ./src/index-dev.js -o ./public/bundle.js",
@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/sriramreddyM/Leaflet.VideoPlay.git"
+    "url": "git+https://github.com/sriramreddyM/Leaflet.VideoMaps.git"
   },
   "keywords": [
     "leaflet",
@@ -21,9 +21,9 @@
   "author": "sriramreddy.m",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/sriramreddyM/Leaflet.VideoPlay/issues"
+    "url": "https://github.com/sriramreddyM/Leaflet.VideoMaps/issues"
   },
-  "homepage": "https://github.com/sriramreddyM/Leaflet.VideoPlay#readme",
+  "homepage": "https://github.com/sriramreddyM/Leaflet.VideoMaps#readme",
   "dependencies": {
     "browserify": "^17.0.0"
   }

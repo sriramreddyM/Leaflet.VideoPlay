@@ -94,7 +94,7 @@ function stopVideo() {
 
 
 
-L.videoMaps = L.VectorGrid.extend({
+L.VideoMaps = L.VectorGrid.extend({
 
     // constructor function
     initialize: function (lineString, div_id, options) {
@@ -258,12 +258,12 @@ L.videoMaps = L.VectorGrid.extend({
     },
 })
 
-L.videoMaps.addTrack = function(lineString, options) {
-    var res = new L.videoMaps(lineString, options);
+L.VideoMaps.addTrack = function(lineString, options) {
+    var res = new L.VideoMaps(lineString, options);
     return res.addTrack();
 }
 
-L.videoMaps.drawTrack = function(lineString, div_id, options) {
-  var res = new L.videoMaps(lineString, div_id, options);
+L.VideoMaps.drawTrack = function(lineString, div_id, options) {
+  var res = new L.VideoMaps(lineString, div_id, options);
   return res.drawTrack();
 }

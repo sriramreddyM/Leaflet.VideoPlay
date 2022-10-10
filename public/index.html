@@ -16,7 +16,7 @@
       href="./style.css"
     /> -->
 
-    <title>leaflet-videoMaps-demo</title>
+    <title>Leaflet.VideoMaps-demo</title>
 
     <style>
       body {
@@ -89,7 +89,7 @@ var map = L.map("map").setView([14.0818318, 100.6325879], 14);
 fetch('./sample.json')
     .then(result => result.json())
     .then((output) => {
-        var addedTrack = L.videoMaps.drawTrack(output, "vplayer").addTo(map);
+        var addedTrack = L.VideoMaps.drawTrack(output, "vplayer").addTo(map);
     })
     .catch(err => console.error(err));
 </script>
