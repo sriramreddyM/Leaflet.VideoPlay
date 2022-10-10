@@ -13,7 +13,6 @@ async function html5video(div_id='vplayer', video_link){
 
   var player = document.getElementById(div_id)
   player.innerHTML = '';
-  console.log("player here", player);
   player.appendChild(video);
   
   video.play();
@@ -27,7 +26,6 @@ async function YTvideo(div_id='vplayer', video_id, l, that){
   var video = document.createElement('div');
   video.setAttribute("id", "YTvideo");
   video.setAttribute("style", player.getAttribute('style'));
-  console.log("player here", player);
   player.appendChild(video);
 
   player = new YT.Player('YTvideo', {
@@ -84,8 +82,6 @@ function onPlayerReady(event) {
 
 var done = false;
 function onPlayerStateChange(event, player) {
-  console.log(player.playerInfo.currentTime); 
-  console.log(event);
   if (event.data == YT.PlayerState.PLAYING && !done) {
     // setTimeout(stopVideo, 6000);
     done = true;
@@ -103,7 +99,6 @@ L.videoMaps = L.VectorGrid.extend({
 
     // constructor function
     initialize: function (lineString, div_id, options) {
-        console.log("this is", this);
         this.lineString = lineString;
         this.selected_track = undefined;
         this.markerPlayer = undefined;
@@ -136,11 +131,8 @@ L.videoMaps = L.VectorGrid.extend({
 
     playMarker: function(track, videoUrl) {
       that = this;
-      // console.log(track, videoUrl);
-      // console.log("playermarker")
       clearInterval(this.pf);
       this.pf = setInterval(async function(){
-        // console.log(that.player);
         if(typeof that.player.seekTo === 'function'){
           var videoSrc = that.player.playerInfo.videoUrl;
           // console.log(videoUrl, videoSrc);
@@ -152,12 +144,10 @@ L.videoMaps = L.VectorGrid.extend({
           if(this.vehicleMarker == undefined){
             this.vehicleMarker = L.marker(ppos).addTo(map);
           }
-          // console.log(ppos);
           this.vehicleMarker.setLatLng(ppos);        
         }
         else if(that.player.type == 'video/mp4' || 'video/ogg' || 'video/webm'){
           var videoSrc = that.player.currentSrc;
-          // console.log(videoUrl, videoSrc);
           if(videoUrl != videoSrc){
             console.log('somehting wrong track src and json url');
             clearInterval(this.pf);
@@ -175,8 +165,8 @@ L.videoMaps = L.VectorGrid.extend({
     },
 
     onPlayerStateChange: function(event) {
-      console.log(this.player.playerInfo.currentTime); 
-      console.log(event);
+      // console.log(this.player.playerInfo.currentTime); 
+      // console.log(event);
       if (event.data == YT.PlayerState.PLAYING && !done) {
         // setTimeout(stopVideo, 6000);
         done = true;
@@ -186,7 +176,6 @@ L.videoMaps = L.VectorGrid.extend({
 
     // if use drawTrack function within class, mouseover and click are not working
     drawTrack: function(that=this, div_id) {
-      console.log('drawing now', this.lineString);
       var vectorGrid = L.vectorGrid.slicer(that.lineString, {
         maxZoom: 18,
         rendererFactory: L.svg.tile,
@@ -208,12 +197,12 @@ L.videoMaps = L.VectorGrid.extend({
         let l = findPosOnTrack(e.latlng, e.layer.properties.track);
         if(e.layer.properties['id'] != that.selected_track){
           if(that.selected_track){
-            console.log("old_track", that.selected_track);
-            // this.setFeatureStyle(this.selected_track, this.regular_style);
+            // console.log("old_track", that.selected_track);
+            this.setFeatureStyle(this.selected_track, this.regular_style);
           }
           that.selected_track = e.layer.properties['id'];
         // this.setFeatureStyle(this.selected_track, this.onclick_style);
-          console.log("new_track", that.selected_track, e.layer.properties.video.url);
+          // console.log("new_track", that.selected_track, e.layer.properties.video.url);
           let video_id = youtube_parser(e.layer.properties.video.url);
           if(e.layer.properties.video.source="youtube" && video_id){
             that.player = await YTvideo('vplayer', video_id, l, that);
@@ -223,12 +212,12 @@ L.videoMaps = L.VectorGrid.extend({
           else if (e.layer.properties.video.source='html5'){
             that.player = await html5video('vplayer', e.layer.properties.video.url);
             that.player.currentTime = Math.floor(l/1000);
-            console.log(that.player, that.player.src, 'clicked');
+            // console.log(that.player, that.player.src, 'clicked');
             that.player.addEventListener('onplay', that.playMarker(e.layer.properties.track, that.player.src));
           }
         }
         else{
-          console.log("same_track", that.selected_track);
+          // console.log("same_track", that.selected_track);
           if(typeof that.player.seekTo === 'function'){
             that.player.seekTo(Math.floor(l/1000));
           }
@@ -247,10 +236,10 @@ L.videoMaps = L.VectorGrid.extend({
                 .openOn(map);
         const pid = await e.layer.properties['id'];
         console.log('pid', pid);
-        console.log(that.selected_track, e.layer.properties['id']);
+        // console.log(that.selected_track, e.layer.properties['id']);
         if(that.selected_track != e.layer.properties['id']){
-          console.log("mouse over");
-          console.log(that);
+          // console.log("mouse over");
+          // console.log(that);
           // this.setFeatureStyle(e.layer.properties['id'], this.mouseover_style);
           await this.setFeatureStyle(pid, this.mouseover_style);
         }
@@ -261,9 +250,7 @@ L.videoMaps = L.VectorGrid.extend({
         }
         map.closePopup()
       })
-      // .addTo(map);
       // map.fitBounds(L.geoJSON(lineString).getBounds());
-      // console.log(vectorGrid);
       return vectorGrid;
     },
 

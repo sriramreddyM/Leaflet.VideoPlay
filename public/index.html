@@ -37,9 +37,20 @@
         z-index: 500;
         /* border: 5px solid red; */
       }
+      .box{
+        position: absolute;
+        top: 0;
+        z-index: 9999;
+        text-align: center;
+        width: 150px;
+        left: 50%;
+        margin-left: -75px; /* half of the width */
+        background-color:rgb(43, 178, 160);
+      }
     </style>
   </head>
   <body>
+    <div class="box"> Click on Track to play the video </div>
     <div id="map"></div>
     <div id="vplayer"></div>
   </body>
