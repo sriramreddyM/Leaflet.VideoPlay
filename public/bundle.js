@@ -1,6 +1,5 @@
 (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
 // L is L
-
 async function html5video(div_id='vplayer', video_link){
   var video = document.createElement('video');
   video.className = 'videop'
@@ -100,7 +99,7 @@ function stopVideo() {
 
 
 
-L.videoTrack = L.VectorGrid.extend({
+L.videoMaps = L.VectorGrid.extend({
 
     // constructor function
     initialize: function (lineString, div_id, options) {
@@ -137,8 +136,8 @@ L.videoTrack = L.VectorGrid.extend({
 
     playMarker: function(track, videoUrl) {
       that = this;
-      console.log(track, videoUrl);
-      console.log("playermarker")
+      // console.log(track, videoUrl);
+      // console.log("playermarker")
       clearInterval(this.pf);
       this.pf = setInterval(async function(){
         // console.log(that.player);
@@ -242,22 +241,25 @@ L.videoTrack = L.VectorGrid.extend({
           }
         }        
       })
-      .on('mouseover', function(e) {
-        L.popup()
-                    .setContent(e.layer.properties.id)
-                    .setLatLng(e.latlng)
-                    .openOn(map);
+      .on('mouseover', async function(e) {
+        L.popup().setContent(e.layer.properties.id)
+                .setLatLng(e.latlng)
+                .openOn(map);
+        const pid = await e.layer.properties['id'];
+        console.log('pid', pid);
         console.log(that.selected_track, e.layer.properties['id']);
         if(that.selected_track != e.layer.properties['id']){
           console.log("mouse over");
           console.log(that);
-          // this.setFeatureStyle(properties['id'], this.mouseover_style);
+          // this.setFeatureStyle(e.layer.properties['id'], this.mouseover_style);
+          await this.setFeatureStyle(pid, this.mouseover_style);
         }
       })
       .on('mouseout', function(e) {
         if(that.selected_track != e.layer.properties['id']){
           vectorGrid.resetFeatureStyle(e.layer.properties['id']);
         }
+        map.closePopup()
       })
       // .addTo(map);
       // map.fitBounds(L.geoJSON(lineString).getBounds());
@@ -270,13 +272,13 @@ L.videoTrack = L.VectorGrid.extend({
     },
 })
 
-L.videoTrack.addTrack = function(lineString, options) {
-    var res = new L.videoTrack(lineString, options);
+L.videoMaps.addTrack = function(lineString, options) {
+    var res = new L.videoMaps(lineString, options);
     return res.addTrack();
 }
 
-L.videoTrack.drawTrack = function(lineString, div_id, options) {
-  var res = new L.videoTrack(lineString, div_id, options);
+L.videoMaps.drawTrack = function(lineString, div_id, options) {
+  var res = new L.videoMaps(lineString, div_id, options);
   return res.drawTrack();
 }
 },{}]},{},[1]);
