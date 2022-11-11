@@ -17,3 +17,8 @@
 
 
 [Demo at](https://sriramreddym.github.io/Leaflet.VideoMaps/dist/)
+
+
+<h4>#To Do</h4>
+* Custom icon for marker
+* Test as native node.js package
