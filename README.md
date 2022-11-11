@@ -1,16 +1,19 @@
-<h3>Leaflet.VideoTrack</h3>
+<h3>Leaflet.VideoMaps</h3>
 
 <p> A leaflet plugin for adding videos with GPS tracks to the map. </p>
 
 > #### It will support,
 >
-> - Interactive videotrack with video timestamp synchronised to locations in GPS track.
+> - Interactive videotrack on map with Location and Timestamp synchronised.
 > - Supports video embeddings from Youtube and other custom hosts.
 
 > #### To use in website,
 >
-> - npm run build (broweserify is needed).
-> - Example usage is in public folder.
+> - npm run build (broweserify), or
+```Javascript
+<script src="https://unpkg.com/leaflet.videomaps@1.1.0/dist/Leaflet.VideoMaps.js"></script>
+```
+> - Example usage is in dist folder.
 
 
-[Demo at](https://sriramreddym.github.io/Leaflet.VideoPlay/public/)
+[Demo at](https://sriramreddym.github.io/Leaflet.VideoMaps/public/)

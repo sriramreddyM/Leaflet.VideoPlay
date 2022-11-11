@@ -16,7 +16,7 @@
       href="./style.css"
     /> -->
 
-    <title>leaflet-videoMaps-demo</title>
+    <title>Leaflet.VideoMaps-demo</title>
 
     <style>
       body {
@@ -37,9 +37,20 @@
         z-index: 500;
         /* border: 5px solid red; */
       }
+      .box{
+        position: absolute;
+        top: 0;
+        z-index: 9999;
+        text-align: center;
+        width: 150px;
+        left: 50%;
+        margin-left: -75px; /* half of the width */
+        background-color:rgb(43, 178, 160);
+      }
     </style>
   </head>
   <body>
+    <div class="box"> Click on Track to play the video </div>
     <div id="map"></div>
     <div id="vplayer"></div>
   </body>
@@ -47,7 +58,8 @@
 
 <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
 <script src="https://unpkg.com/leaflet.vectorgrid@latest/dist/Leaflet.VectorGrid.js"></script>
-<script src="./bundle.js"></script>
+<script src="./Leaflet.VideoMaps.js"></script>
+<!-- <script src="https://unpkg.com/leaflet.videomaps@1.1.0/dist/Leaflet.VideoMaps.js"></script> -->
 <script src="https://www.youtube.com/iframe_api"></script>
 
 <script>
@@ -78,7 +90,7 @@ var map = L.map("map").setView([14.0818318, 100.6325879], 14);
 fetch('./sample.json')
     .then(result => result.json())
     .then((output) => {
-        var addedTrack = L.videoMaps.drawTrack(output, "vplayer").addTo(map);
+        var addedTrack = L.VideoMaps.drawTrack(output, "vplayer").addTo(map);
     })
     .catch(err => console.error(err));
 </script>
