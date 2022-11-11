@@ -1,6 +1,6 @@
-<h3>Leaflet.VideoMaps</h3>
+# Leaflet.VideoMaps #
 
-<p> A leaflet plugin for adding videos with GPS tracks to the map. </p>
+A leaflet plugin for adding videos with GPS tracks to the map.
 
 > #### It will support,
 >
@@ -18,7 +18,7 @@
 
 Go to [Demo](https://sriramreddym.github.io/Leaflet.VideoMaps/dist/)
 
-#Todo list
+### Todo list ###
 
 - [ ] Custom icon for marker
 - [ ] Node.js package
