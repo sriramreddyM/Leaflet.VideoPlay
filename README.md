@@ -16,8 +16,9 @@
 > - Example usage is in dist folder.
 
 
-[Demo at](https://sriramreddym.github.io/Leaflet.VideoMaps/dist/)
+Go to [Demo](https://sriramreddym.github.io/Leaflet.VideoMaps/dist/)
 
+#Todo list
 
 - [ ] Custom icon for marker
 - [ ] Node.js package
