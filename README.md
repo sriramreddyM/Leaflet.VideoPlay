@@ -11,7 +11,7 @@
 >
 > - npm run build (broweserify), or
 ```Javascript
-<script src="https://unpkg.com/leaflet.videomaps@1.1.0/dist/Leaflet.VideoMaps.js"></script>
+<script src="https://unpkg.com/leaflet.videomaps@1.1.1/dist/Leaflet.VideoMaps.js"></script>
 ```
 > - Example usage is in dist folder.
 
