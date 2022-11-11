@@ -19,8 +19,6 @@
 [Demo at](https://sriramreddym.github.io/Leaflet.VideoMaps/dist/)
 
 
-<h4>#To Do</h4>
-~~~
 - [ ] Custom icon for marker
 - [ ] Node.js package
-~~~
+
