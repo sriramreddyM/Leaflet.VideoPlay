@@ -20,5 +20,5 @@
 
 
 <h4>#To Do</h4>
-* Custom icon for marker
-* Test as native node.js package
+> * Custom icon for marker
+> * Test as native node.js package
