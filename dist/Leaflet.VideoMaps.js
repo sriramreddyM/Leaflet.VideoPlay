@@ -15,7 +15,17 @@ async function html5video(div_id='vplayer', video_link){
   player.innerHTML = '';
   player.appendChild(video);
   
-  video.play();
+  var playPromise = video.play();
+
+  playPromise.then(_ => {
+      // Automatic playback started!
+      // Show playing UI.
+      return video;
+  })
+  .catch(error => {
+    // Auto-play was prevented
+    // Show paused UI.
+  });
   return video;
 }
 
@@ -195,13 +205,13 @@ L.VideoMaps = L.VectorGrid.extend({
           return;
         }
         let l = findPosOnTrack(e.latlng, e.layer.properties.track);
-        if(e.layer.properties['id'] != that.selected_track){
+        if(e.layer.properties.id != that.selected_track){
           if(that.selected_track){
             // console.log("old_track", that.selected_track);
             this.setFeatureStyle(this.selected_track, this.regular_style);
           }
-          that.selected_track = e.layer.properties['id'];
-        // this.setFeatureStyle(this.selected_track, this.onclick_style);
+          that.selected_track = e.layer.properties.id;
+        this.setFeatureStyle(e.layer.properties.id, that.onclick_style);
           // console.log("new_track", that.selected_track, e.layer.properties.video.url);
           let video_id = youtube_parser(e.layer.properties.video.url);
           if(e.layer.properties.video.source="youtube" && video_id){
@@ -218,6 +228,7 @@ L.VideoMaps = L.VectorGrid.extend({
         }
         else{
           // console.log("same_track", that.selected_track);
+          console.log(that.player)
           if(typeof that.player.seekTo === 'function'){
             that.player.seekTo(Math.floor(l/1000));
           }
@@ -231,22 +242,16 @@ L.VideoMaps = L.VectorGrid.extend({
         }        
       })
       .on('mouseover', async function(e) {
-        L.popup().setContent(e.layer.properties.id)
-                .setLatLng(e.latlng)
-                .openOn(map);
-        const pid = await e.layer.properties['id'];
-        console.log('pid', pid);
-        // console.log(that.selected_track, e.layer.properties['id']);
-        if(that.selected_track != e.layer.properties['id']){
-          // console.log("mouse over");
-          // console.log(that);
-          // this.setFeatureStyle(e.layer.properties['id'], this.mouseover_style);
-          await this.setFeatureStyle(pid, this.mouseover_style);
+        // L.popup().setContent(e.layer.properties.id)
+                // .setLatLng(e.latlng)
+                // .openOn(map);
+        if(that.selected_track != e.layer.properties.id){
+          this.setFeatureStyle(e.layer.properties.id, that.mouseover_style);
         }
       })
       .on('mouseout', function(e) {
-        if(that.selected_track != e.layer.properties['id']){
-          vectorGrid.resetFeatureStyle(e.layer.properties['id']);
+        if(that.selected_track != e.layer.properties.id){
+          vectorGrid.resetFeatureStyle(e.layer.properties.id);
         }
         map.closePopup()
       })
