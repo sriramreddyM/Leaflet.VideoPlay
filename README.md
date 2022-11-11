@@ -16,4 +16,4 @@
 > - Example usage is in dist folder.
 
 
-[Demo at](https://sriramreddym.github.io/Leaflet.VideoMaps/public/)
+[Demo at](https://sriramreddym.github.io/Leaflet.VideoMaps/dist/)
