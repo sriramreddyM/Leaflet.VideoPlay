@@ -20,5 +20,7 @@
 
 
 <h4>#To Do</h4>
+~~~
 - [ ] Custom icon for marker
 - [ ] Node.js package
+~~~
