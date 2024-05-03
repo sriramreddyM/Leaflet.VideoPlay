@@ -1,4 +1,4 @@
-# Leaflet.VideoMaps #
+# Leaflet.VideoMaps
 
 A leaflet plugin for adding videos with GPS tracks to the map.
 
@@ -21,10 +21,12 @@ fetch('./sample.json')
 
 ```
 
-Example usage is in dist folder. Go to [Demo](https://sriramreddym.github.io/Leaflet.VideoMaps/dist/)
+## Demo
 
-### Todo list ###
+1. Basic usecase: [https://sriramreddym.github.io/Leaflet.VideoMaps/dist/](https://sriramreddym.github.io/Leaflet.VideoMaps/dist/)
+2. Add video by default: [https://sriramreddym.github.io/Leaflet.VideoMaps/dist/addVideoByDefault.html](https://sriramreddym.github.io/Leaflet.VideoMaps/dist/addVideoByDefault.html)
+
+### Todo list
 
 - [ ] Custom icon for marker
 - [ ] Node.js package
-

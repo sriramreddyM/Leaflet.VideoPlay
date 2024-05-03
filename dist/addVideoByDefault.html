@@ -29,7 +29,7 @@
       }
       #vplayer {
         position: absolute;
-        top: 540px;
+        bottom: 20px;
         left: 10px;
         width: 300px;
         height: 180px;
@@ -59,7 +59,7 @@
 <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
 <script src="https://unpkg.com/leaflet.vectorgrid@latest/dist/Leaflet.VectorGrid.js"></script>
 <!-- <script src="./Leaflet.VideoMaps.js"></script> -->
-<script src="https://unpkg.com/leaflet.videomaps@1.1.1/dist/Leaflet.VideoMaps.js"></script>
+<script src="./Leaflet.VideoMaps.js"></script>
 <script src="https://www.youtube.com/iframe_api"></script>
 
 <script>
@@ -89,7 +89,22 @@
   fetch("./sample.json")
     .then((result) => result.json())
     .then((output) => {
+      console.log(output, "output");
       var addedTrack = L.VideoMaps.drawTrack(output, "vplayer").addTo(map);
-    })
-    .catch((err) => console.error(err));
+
+      // get the first coordinate from json and play the video
+      var firstCoords = output.features[0].geometry.coordinates[0];
+      console.log(firstCoords, "firstCoords");
+
+      // play the vide by default
+      addedTrack
+        .getLayers()
+        .then((res) => {
+          addedTrack.fire("click", {
+            latlng: L.latLng(firstCoords[1], firstCoords[0]),
+            layer: Object.values(res[0])[0],
+          });
+        })
+        .catch((err) => console.log(err, "ERR"));
+    });
 </script>
